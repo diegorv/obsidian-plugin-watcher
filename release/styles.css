@@ -1,0 +1,117 @@
+/* Extension Watcher Plugin Styles */
+
+.extension-watcher-stats {
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.extension-watcher-stats p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.extension-watcher-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.extension-watcher-controls button {
+    padding: 8px 16px;
+    border: 1px solid var(--interactive-accent);
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.extension-watcher-controls button:hover {
+    background: var(--interactive-accent-hover);
+}
+
+.extension-watcher-logs {
+    font-family: var(--font-monospace);
+    font-size: 12px;
+}
+
+.log-entry {
+    transition: background-color 0.2s;
+}
+
+.log-entry:hover {
+    background: var(--background-secondary);
+}
+
+.log-time {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.log-info {
+    margin-bottom: 5px;
+}
+
+.log-info strong {
+    color: var(--text-accent);
+}
+
+details summary {
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+details summary:hover {
+    color: var(--text-normal);
+}
+
+details pre {
+    background: var(--background-primary-alt);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 3px;
+    padding: 8px;
+    margin: 5px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Modal específico */
+.modal.extension-watcher-modal {
+    max-width: 80vw;
+    max-height: 80vh;
+}
+
+.modal.extension-watcher-modal .modal-content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Highlight para diferentes tipos de log */
+.log-entry[data-type="file"] {
+    border-left: 3px solid var(--color-blue);
+}
+
+.log-entry[data-type="command"] {
+    border-left: 3px solid var(--color-green);
+}
+
+.log-entry[data-type="network"] {
+    border-left: 3px solid var(--color-orange);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .extension-watcher-controls {
+        flex-direction: column;
+    }
+    
+    .extension-watcher-controls button {
+        width: 100%;
+    }
+}
+

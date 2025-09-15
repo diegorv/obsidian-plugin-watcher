@@ -42,8 +42,22 @@ Extension Watcher is a powerful debugging and security tool that helps you under
 
 ## Installation
 
+### From Release
+
 1. Download the latest release from the [releases page](https://github.com/diegorv/obsidian-plugin-watcher/releases)
 2. Copy `main.js`, `manifest.json`, and `styles.css` to your vault's `.obsidian/plugins/obsidian-extension-watcher/` folder
+3. Enable the plugin in Obsidian's Community Plugins settings
+
+### From Source
+
+1. Clone the repository and build the plugin:
+   ```bash
+   git clone https://github.com/diegorv/obsidian-plugin-watcher.git
+   cd obsidian-extension-watcher
+   npm install
+   node esbuild.config.mjs production
+   ```
+2. Copy the files from the `release/` directory to your vault's `.obsidian/plugins/obsidian-extension-watcher/` folder
 3. Enable the plugin in Obsidian's Community Plugins settings
 
 ## Usage
@@ -132,6 +146,40 @@ npm run build
 # Run tests
 npm test
 ```
+
+### Build System
+
+The project uses esbuild for fast and efficient builds. The build system automatically creates a `release/` directory where all compiled files are stored, keeping the project root clean and organized.
+
+#### Build Commands
+
+```bash
+# Production build (minified, optimized)
+node esbuild.config.mjs production
+
+# Development build (with sourcemaps, watch mode)
+node esbuild.config.mjs development
+```
+
+#### Release Directory Structure
+
+After building, the following files will be available in the `release/` directory:
+
+```
+release/
+├── main.js        # Main plugin file (compiled from TypeScript)
+├── manifest.json  # Plugin manifest
+└── styles.css     # Plugin styles
+```
+
+#### Build Features
+
+- **Automatic Release Directory**: Creates `release/` folder automatically
+- **File Copying**: Automatically copies `manifest.json` and `styles.css` to release directory
+- **Security Validation**: Validates imports and prevents unsafe dependencies
+- **Source Maps**: Generated in development mode for debugging
+- **Minification**: Applied in production builds
+- **Bundle Analysis**: Shows bundle size in production builds
 
 ### Scripts
 

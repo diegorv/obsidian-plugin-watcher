@@ -2,7 +2,8 @@ import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
 import { fileURLToPath } from "url";
-import { dirname, resolve } from "path";
+import { dirname, resolve, join } from "path";
+import { mkdirSync, copyFileSync, existsSync } from "fs";
 
 // Security: Get current directory safely
 const __filename = fileURLToPath(import.meta.url);
@@ -48,6 +49,33 @@ const allowedExternals = [
 // Security: Validate entry point exists
 const entryPoint = resolve(__dirname, 'main.ts');
 
+// Create release directory
+const releaseDir = resolve(__dirname, 'release');
+if (!existsSync(releaseDir)) {
+  mkdirSync(releaseDir, { recursive: true });
+  console.log(`📁 Created release directory: ${releaseDir}`);
+}
+
+// Function to copy necessary files to release directory
+const copyReleaseFiles = () => {
+  const filesToCopy = [
+    'manifest.json',
+    'styles.css'
+  ];
+  
+  filesToCopy.forEach(file => {
+    const sourcePath = resolve(__dirname, file);
+    const destPath = resolve(releaseDir, file);
+    
+    if (existsSync(sourcePath)) {
+      copyFileSync(sourcePath, destPath);
+      console.log(`📋 Copied ${file} to release directory`);
+    } else {
+      console.warn(`⚠️  File not found: ${file}`);
+    }
+  });
+};
+
 try {
   const config = {
     banner: {
@@ -61,7 +89,7 @@ try {
     logLevel: 'info',
     sourcemap: isProd ? false : 'inline',
     treeShaking: true,
-    outfile: resolve(__dirname, 'main.js'),
+    outfile: resolve(releaseDir, 'main.js'),
     
     // Security enhancements
     minify: isProd,
@@ -130,6 +158,10 @@ try {
                 const bundleSize = Object.values(result.metafile.outputs)[0]?.bytes || 0;
                 console.log(`📦 Bundle size: ${(bundleSize / 1024).toFixed(2)} KB`);
               }
+              
+              // Copy necessary files to release directory
+              copyReleaseFiles();
+              console.log(`📁 Release files saved to: ${releaseDir}`);
             } else {
               console.error(`❌ Build failed with ${result.errors.length} error(s)`);
             }
