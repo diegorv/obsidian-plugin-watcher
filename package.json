@@ -32,7 +32,7 @@
 		"@typescript-eslint/parser": "^6.21.0",
 		"builtin-modules": "3.3.0",
 		"esbuild": "0.17.3",
-		"eslint": "^8.57.0",
+		"eslint": "^9.35.0",
 		"eslint-import-resolver-typescript": "^4.4.4",
 		"eslint-plugin-import": "^2.32.0",
 		"eslint-plugin-security": "^1.7.1",
