@@ -1,8 +1,19 @@
+# Dependencies
 node_modules/
-coverage/
+
+# Build output
 release/
 *.js
 !esbuild.config.mjs
 !jest.config.mjs
-.DS_Store
+!version-bump.mjs
+
+# Test coverage
+coverage/
+
+# Obsidian data
 data.json
+
+# OS files
+.DS_Store
+Thumbs.db
