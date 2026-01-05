@@ -5,3 +5,4 @@ release/
 !esbuild.config.mjs
 !jest.config.mjs
 .DS_Store
+data.json
