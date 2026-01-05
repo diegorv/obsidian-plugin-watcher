@@ -1,0 +1,7 @@
+node_modules/
+coverage/
+release/
+*.js
+!esbuild.config.mjs
+!jest.config.mjs
+.DS_Store
